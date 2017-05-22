@@ -9,6 +9,10 @@
 			<input type="url" placeholder="Please enter a link" name="destination">
 			<input type="submit" value="Submit" name="">
 		</form>
+
+		{% if short_link %}
+			<h3>Your shortend link is: <a href="{{ short_link}}">{{ short_link}}</a></h3>
+		{% endif %}
 	</div>
 </body>
 </html>
