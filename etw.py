@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, abort
 from hashids import Hashids
 import sqlite3
 app = Flask(__name__)
 
 hashids = Hashids(salt="why so salty")
+
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template('404.html'), 404
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -37,11 +41,13 @@ def index():
 @app.route('/<link_hash>')
 def redir(link_hash):
 	# Decode the shortlink and find the item in the db!
-	link_id = hashids.decode(link_hash)[0]
-	print("Incoming hash:",link_hash,"has been decoded to id:",link_id)
-	conn = sqlite3.connect('test.db')
-	db_cursor = conn.cursor()
-	dest_link = db_cursor.execute("SELECT * FROM links WHERE id=?",(link_id,)).fetchone()[1]
-	print("Short link found! Redirecting to: ", dest_link)
-	return redirect(dest_link, code=308,)
-	
+	try:
+		link_id = hashids.decode(link_hash)[0]
+		print("Incoming hash:",link_hash,"has been decoded to id:",link_id)
+		conn = sqlite3.connect('test.db')
+		db_cursor = conn.cursor()
+		dest_link = db_cursor.execute("SELECT * FROM links WHERE id=?",(link_id,)).fetchone()[1]
+		print("Short link found! Redirecting to: ", dest_link)
+		return redirect(dest_link, code=308,)
+	except Exception:
+		abort(404)
