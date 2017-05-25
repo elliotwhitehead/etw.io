@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from hashids import Hashids
 import sqlite3
 app = Flask(__name__)
@@ -28,12 +28,20 @@ def index():
 		conn.commit()
 		conn.close()
 
-		short_link = "http://etw.io/" + link_hash
+		short_link = "/" + link_hash
 
 		return render_template('index.html', short_link=short_link)
 	else:
 		return render_template('index.html')
 
-@app.route('/create')
-def test():
-	return "Eyy a link!\n"
+@app.route('/<link_hash>')
+def redir(link_hash):
+	# Decode the shortlink and find the item in the db!
+	link_id = hashids.decode(link_hash)[0]
+	print("Incoming hash:",link_hash,"has been decoded to id:",link_id)
+	conn = sqlite3.connect('test.db')
+	db_cursor = conn.cursor()
+	dest_link = db_cursor.execute("SELECT * FROM links WHERE id=?",(link_id,)).fetchone()[1]
+	print("Short link found! Redirecting to: ", dest_link)
+	return redirect(dest_link, code=308,)
+	
