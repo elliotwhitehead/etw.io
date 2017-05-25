@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 	<title>etw.io</title>
 </head>
 <body>
-	<div style="width:200px; margin:250px auto;">
-		<form method="POST" accept-charset="utf-8">
-			<input type="url" placeholder="Please enter a link" name="destination">
-			<input type="submit" value="Submit" name="">
+	<div style="width:500px; margin:250px auto;">
+		<h1>Hey there,</h1>
+		<p>etw.io shortens links for you.<br>Just paste in a valid URL <span style="color:red;">(starting with http://)</span><br>below and hit the green button</p>
+		<form method="POST" accept-charset="utf-8" style="margin-top:50px;">
+			<div class="input-field">
+				<input id="link" type="url" placeholder="http://example.com" name="destination">
+				<label for="link">Long URL to be shortened:</label>
+				<input class="btn waves-effect waves-light" type="submit" value="Compress" name="">
+			</div>
 		</form>
 
 		{% if short_link %}
-			<h3>Your shortend link is: <a href="{{ short_link}}">{{ short_link}}</a></h3>
+			<h4>Your shortend link is: <a target="_blank" href="{{ short_link }}">etw.io{{ short_link }}</a></h4>
 		{% endif %}
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
