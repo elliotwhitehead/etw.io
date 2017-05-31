@@ -1,2 +1,3 @@
 Flask==0.12
 hashids==1.2.0
+gunicorn==19.7.1
