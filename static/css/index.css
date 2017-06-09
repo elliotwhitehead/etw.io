@@ -1,0 +1,42 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+h1, h2, h3, h4, h5{
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.welcome{
+	margin: 2rem 0;
+}
+
+.page-footer{
+	background-color: #343434;
+	color: #888;
+	padding: 0;
+}
+
+.page-footer p{
+	margin: 0;
+	padding: 15px;
+	text-align: center;
+}
+
+.page-footer a, .page-footer a:visited{
+	color: inherit;
+}
+
+.page-footer i{
+	vertical-align: middle !important;
+}
+
+.page-footer span{
+	color: #efefef;
+}

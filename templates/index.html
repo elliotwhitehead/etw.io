@@ -2,26 +2,39 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>etw.io</title>
 </head>
 <body>
-	<div style="width:500px; margin:250px auto;">
-		<h1>Hey there,</h1>
-		<p>etw.io shortens links for you.<br>Just paste in a valid URL <span style="color:red;">(starting with http://)</span><br>below and hit the green button</p>
-		<form method="POST" accept-charset="utf-8" style="margin-top:50px;">
-			<div class="input-field">
-				<input id="link" type="url" placeholder="http://example.com" name="destination">
-				<label for="link">Long URL to be shortened:</label>
-				<input class="btn waves-effect waves-light" type="submit" value="Compress" name="">
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col s12 l6 offset-l3">
+					<h1 class="welcome">Hey there,</h1>
+					<p>etw.io shortens links for you.<br>Just paste in a valid URL <span style="color:red;">(starting with http://)</span><br>below and hit the green button</p>
+					<form method="POST" accept-charset="utf-8" style="margin-top:50px;">
+						<div class="input-field">
+							<input id="link" type="url" placeholder="http://example.com" name="destination">
+							<label for="link">Long URL to be shortened:</label>
+							<input class="btn waves-effect waves-light" type="submit" value="Compress" name="">
+						</div>
+					</form>
+					{% if short_link %}
+						<h4>Your shortened link is: <a target="_blank" href="{{ short_link }}">etw.io{{ short_link }}</a></h4>
+					{% endif %}
+				</div>
 			</div>
-		</form>
+		</div>
+	</main>
 
-		{% if short_link %}
-			<h4>Your shortened link is: <a target="_blank" href="{{ short_link }}">etw.io{{ short_link }}</a></h4>
-		{% endif %}
-	</div>
+		<footer class="page-footer">
+			<div class="container">
+				<p><a target="_blank" href="https://github.com/elliotwhitehead"><i class="material-icons">code</i> by <span>E</span>lliot <span>T</span>. <span>W</span>hitehead in Boulder, CO.</a></p>
+			</div>
+		</footer>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
