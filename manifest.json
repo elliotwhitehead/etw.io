@@ -1,0 +1,8 @@
+{
+  "name": "etw.io",
+  "short_name": "etw.io",
+  "display": "fullscreen",
+  "lang": "en-US",
+  "description": "A simple link shortener.",
+  "orientation": "portrait"
+}
