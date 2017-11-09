@@ -17,6 +17,14 @@ main {
 	margin: 2rem 0;
 }
 
+.waves-input-wrapper {
+  padding: 0;
+}
+
+.waves-button-input {
+  padding: 0 30px;
+}
+
 .page-footer{
 	background-color: #343434;
 	color: #888;
